@@ -79,6 +79,7 @@ function search(){
   }
 
   if(!fetching){
+    searchType = 0;
     fetchProcess();
     firstSearchDone = true;
   }
