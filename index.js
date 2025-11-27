@@ -7,18 +7,10 @@ let pageCounter = 1;
 let searchName = "";
 let year = "";
 let fetching = false;
-let firstSearchDone = false;
-let searchType = 0;
+let firstSearch = false;
 
 let myDivSearch, myInput, myBtnSearch, myIcon, myBtnFilter;
 let error;
-
-window.onscroll = (e) => {
-  let closeToEnd = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
-  searchType = 1;
-  if(closeToEnd) search();
-}
-
 
 function begin(){
   myDivSearch = document.createElement("div");
@@ -55,7 +47,6 @@ function begin(){
 
   myBtnSearch.addEventListener("click", (e) =>{
     if(myInput.value.length > 2){
-      searchType = 0;
       search();
     }
   })
@@ -71,7 +62,7 @@ function begin(){
 
 function search(){
   error.innerHTML = "";
-  if(firstSearchDone){
+  if(firstSearch){
     myDivMovies.remove();
 
     myDivMovies = document.createElement("div");
@@ -79,12 +70,14 @@ function search(){
     mySectMovies.appendChild(myDivMovies);
   }
 
-  if(!fetching && searchType == 0){
-    fetchProcess()
+  let searchType = 0;
+  if(!fetching){
+    fetchProcess(searchType)
   }
 
-  if(searchType == 1 && error.value == undefined){
-    firstSearchDone = true;
+  if(!firstSearch && error == ""){
+    searchType = 1;
+    firstSearch = true;
 
     let myBtnLoadDiv = document.createElement("div");
     myBtnLoadDiv.className = "load-container";
@@ -121,6 +114,7 @@ function fetchProcess(searchType, myLoading){
 }
 
 function showMovies(movies){
+  console.log(movies);
   if(movies){
     let moviesLength = movies.length;
     for(let i=0; i<moviesLength; i++){
