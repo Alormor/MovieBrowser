@@ -37,9 +37,16 @@ function begin(){
   myIcon.className = "fa fa-search";
   myBtnSearch.appendChild(myIcon);
 
-  myBtnFilter = document.createElement("button");
-  myBtnFilter.innerHTML = "Filter";
-  myDivSearch.appendChild(myBtnFilter);
+  myInputYear = document.createElement("input");
+  myInputYear.id = "input-year";
+  myInputYear.placeholder = "Year";
+  myDivSearch.appendChild(myInputYear);
+
+  myInputType = document.createElement("input");
+  myInputType.id = "input-year";
+  myInputYear.placeholder = "Year";
+  myDivSearch.appendChild(myInputYear);
+
 
   mySectMovies = document.createElement("section");
   mySectMovies.id="sectMovies";
@@ -65,7 +72,6 @@ function begin(){
     }
   })
 
-  // Filters
 }
 
 function search(){
@@ -86,7 +92,7 @@ function search(){
 }
 
 function fetchProcess(){
-  year="";
+  year=myInputYear.value;
   searchName = myInput.value;
   fetching = true;
   pageCounter = searchType == 0? 1: pageCounter + 1;
