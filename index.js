@@ -2,12 +2,20 @@ window.onload = ()=>{
   begin();
 }
 
+window.onscroll = (e) => {
+  let closeToEnd = window.innerHeight + window.scrollY >= document.body.offsetHeight;
+  scrolling = true;
+  searchType = 1;
+  if(closeToEnd && firstSearchDone) fetchProcess();;
+}
+
 let sectionMovies, myDivMovies;
 let pageCounter = 1;
 let searchName = "";
 let year = "";
 let fetching = false;
-let firstSearch = false;
+let firstSearchDone = false;
+let searchType = false;
 
 let myDivSearch, myInput, myBtnSearch, myIcon, myBtnFilter;
 let error;
@@ -62,7 +70,7 @@ function begin(){
 
 function search(){
   error.innerHTML = "";
-  if(firstSearch){
+  if(firstSearchDone ){
     myDivMovies.remove();
 
     myDivMovies = document.createElement("div");
@@ -70,39 +78,15 @@ function search(){
     mySectMovies.appendChild(myDivMovies);
   }
 
-  let searchType = 0;
   if(!fetching){
-    fetchProcess(searchType)
-  }
-
-  if(!firstSearch && error.value == undefined){
-    searchType = 1;
-    firstSearch = true;
-
-    let myBtnLoadDiv = document.createElement("div");
-    myBtnLoadDiv.className = "load-container";
-    document.body.appendChild(myBtnLoadDiv);
-    
-    let myBtnLoad = document.createElement("button");
-    myBtnLoad.innerHTML = "Load more";
-    myBtnLoadDiv.appendChild(myBtnLoad);
-
-    myBtnLoad.addEventListener("click", (e) =>{
-      if(!fetching){
-        let myLoading = document.createElement("p");
-        myLoading.innerHTML = "Loading...";
-        myBtnLoadDiv.appendChild(myLoading); 
-
-        fetchProcess(searchType, myLoading);
-      }
-    })
+    fetchProcess();
+    firstSearchDone = true;
   }
 }
 
-function fetchProcess(searchType, myLoading){
+function fetchProcess(){
   year="";
   searchName = myInput.value;
-  myInput.value = "Loading...";
   fetching = true;
   pageCounter = searchType == 0? 1: pageCounter + 1;
   fetch("https://www.omdbapi.com/?s="+searchName+"&y="+year+"&apikey=dfe7b98e&page="+pageCounter).then(
@@ -110,8 +94,7 @@ function fetchProcess(searchType, myLoading){
     showMovies(data.Search);
     fetching = false;
     myInput.value = searchName;
-    if(searchType == 1)
-      myLoading.remove();
+    scrolling = false;
   })
 }
 
