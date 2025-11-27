@@ -75,7 +75,7 @@ function search(){
     fetchProcess(searchType)
   }
 
-  if(!firstSearch && error == ""){
+  if(!firstSearch && error.value == undefined){
     searchType = 1;
     firstSearch = true;
 
@@ -102,12 +102,14 @@ function search(){
 function fetchProcess(searchType, myLoading){
   year="";
   searchName = myInput.value;
+  myInput.value = "Loading...";
   fetching = true;
   pageCounter = searchType == 0? 1: pageCounter + 1;
   fetch("https://www.omdbapi.com/?s="+searchName+"&y="+year+"&apikey=dfe7b98e&page="+pageCounter).then(
   response => response.json()).then(data =>{
     showMovies(data.Search);
     fetching = false;
+    myInput.value = searchName;
     if(searchType == 1)
       myLoading.remove();
   })
