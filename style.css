@@ -8,6 +8,34 @@ body {
     color: white;
 }
 
+#landing-page{
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#search-page{
+    position: relative;
+    margin-top: -115px;
+    visibility: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#go-SP, #go-LP {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
 h1{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
@@ -31,7 +59,7 @@ img {
     height: 320px;
 }
 
-.search-container{
+#search-container{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
     justify-content: center;
@@ -39,12 +67,12 @@ img {
     gap: 20px;
 }
 
-.search-container input{
+#search-container input{
     width: 400px;
     height: 35px;
 }
 
-.load-container{
+#load-container{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
     justify-content: center;

@@ -2,11 +2,10 @@ window.onload = ()=>{
   begin();
 }
 
-window.onscroll = (e) => {
-  let closeToEnd = window.innerHeight + window.scrollY >= document.body.offsetHeight;
-  scrolling = true;
+window.onscroll = () => {
+  let closeToEnd = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
   searchType = 1;
-  if(closeToEnd && firstSearchDone) fetchProcess();;
+  if(closeToEnd && firstSearchDone && !fetching) fetchProcess();
 }
 
 let sectionMovies, myDivMovies;
@@ -21,44 +20,37 @@ let myDivSearch, myInput, myBtnSearch, myIcon, myBtnFilter;
 let error;
 
 function begin(){
-  myDivSearch = document.createElement("div");
-  myDivSearch.className = "search-container";
-  document.body.appendChild(myDivSearch);
+  let mySearchPage = document.getElementById("search-page");
+  let myLandingPage = document.getElementById("landing-page");
+  let myBtnGoSearch = document.getElementById("go-SP");
+  let myBtnGoLanding = document.getElementById("go-LP");
 
-  myInput = document.createElement("input");
-  myInput.placeholder = "Search...";
-  myDivSearch.appendChild(myInput);
+  myDivSearch = document.getElementById("search-container");
 
-  myBtnSearch = document.createElement("button");
-  myBtnSearch.id = "btn-search";
-  myDivSearch.appendChild(myBtnSearch);
+  myInput = document.getElementById("input-search");
 
-  myIcon = document.createElement("i");
-  myIcon.className = "fa fa-search";
-  myBtnSearch.appendChild(myIcon);
+  myBtnSearch = document.getElementById("btn-search");
 
-  myInputYear = document.createElement("input");
-  myInputYear.id = "input-year";
-  myInputYear.placeholder = "Year";
-  myDivSearch.appendChild(myInputYear);
+  myInputYear = document.createElement("input-year");
 
-  myInputType = document.createElement("input");
-  myInputType.id = "input-year";
-  myInputYear.placeholder = "Year";
-  myDivSearch.appendChild(myInputYear);
+  mySectMovies = document.getElementById("sectMovies");
+
+  myDivMovies = document.getElementById("divMovies");
+
+  error = document.getElementById("error");
+
+  myBtnGoSearch.addEventListener("click", (e) => {
+    mySearchPage.style.visibility = "visible";
+    myLandingPage.style.visibility = "hidden";
+  });
+
+  myBtnGoLanding.addEventListener("click", (e) => {
+    mySearchPage.style.visibility = "hidden";
+    myLandingPage.style.visibility = "visible";
+    if(myDivMovies) myDivMovies.remove();
+  });
 
 
-  mySectMovies = document.createElement("section");
-  mySectMovies.id="sectMovies";
-  document.body.appendChild(mySectMovies);
-
-  myDivMovies = document.createElement("div");
-  myDivMovies.id="divMovies";
-  mySectMovies.appendChild(myDivMovies);
-
-  error = document.createElement("p");
-  error.id = "error";
-  document.body.appendChild(error);
 
   myBtnSearch.addEventListener("click", (e) =>{
     if(myInput.value.length > 2){
@@ -101,7 +93,6 @@ function fetchProcess(){
     showMovies(data.Search);
     fetching = false;
     myInput.value = searchName;
-    scrolling = false;
   })
 }
 

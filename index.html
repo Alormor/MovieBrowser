@@ -9,8 +9,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <h1>MOVIES.COM</h1>
-    
+    <div id="landing-page">
+        <h1>Welcome to my landing page!</h1>
+        <button id="go-SP">Search movies</button>
+    </div>
 
+    <div id="search-page">
+        <button id="go-LP">Go back to landing page</button>
+        <h1>MOVIES.COM</h1>
+        <div id="search-container">
+            <input id="input-search" placeholder="Search...">
+
+            <button id="btn-search">
+                <i class="fa fa-search"></i>
+            </button>
+
+            <input id="input-year" placeholder="Year">
+        </div>
+        
+        <section id="sectMovies">
+            <div id="divMovies"></div>
+            <p id="error"></p>
+        </section>
+    </div>
 </body>
 </html>
