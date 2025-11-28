@@ -31,7 +31,7 @@ function begin(){
 
   myBtnSearch = document.getElementById("btn-search");
 
-  myInputYear = document.createElement("input-year");
+  myInputYear = document.getElementById("input-year");
 
   mySectMovies = document.getElementById("sectMovies");
 
@@ -47,6 +47,8 @@ function begin(){
   myBtnGoLanding.addEventListener("click", (e) => {
     mySearchPage.style.visibility = "hidden";
     myLandingPage.style.visibility = "visible";
+    myInput.value = "";
+    myInputYear.value = "";
     if(myDivMovies) myDivMovies.remove();
   });
 
