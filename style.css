@@ -8,19 +8,24 @@ body {
     color: white;
 }
 
-#landing-page{
-    position: relative;
-    height: 100%;
+#landing {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+}
+
+.landing-content {
+    background-color: rgba(0,0,0,0.8);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
     text-align: center;
 }
 
-#search-page{
+#search{
     position: relative;
-    margin-top: -115px;
+    margin-top: -400px;
     visibility: hidden;
     height: 100%;
     display: flex;
@@ -30,10 +35,10 @@ body {
     text-align: center;
 }
 
-#go-SP, #go-LP {
+#go-LP {
     position: absolute;
-    top: 15px;
     right: 15px;
+    margin-top: -65px;
 }
 
 h1{
@@ -67,9 +72,30 @@ img {
     gap: 20px;
 }
 
-#search-container input{
+#search-container > input{
     width: 400px;
     height: 35px;
+}
+
+#filters >  input{
+    width: 40px;
+    height: 35px;
+}
+
+#filters >  select{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 90px;
+    height: 40px;
+    background-image: url('https://media.posterlounge.com/img/products/650000/643985/643985_poster.jpg');
+    background-position: center center;
+    background-attachment: fixed; 
+    padding: 5px;
+    height: 40px;
+    cursor: pointer;
+    font-weight: bold;
+    color: darkblue;
+    border-style: none;
+    border-radius: 10px;
 }
 
 #load-container{

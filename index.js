@@ -12,17 +12,18 @@ let sectionMovies, myDivMovies;
 let pageCounter = 1;
 let searchName = "";
 let year = "";
+let type = "";
 let fetching = false;
 let firstSearchDone = false;
 let searchType = false;
 let loadGif;
 
-let myDivSearch, myInput, myBtnSearch, myIcon, myBtnFilter;
+let myDivSearch, myInput, myBtnSearch, myIcon, myInputYear, mySelectType;
 let error;
 
 function begin(){
-  let mySearchPage = document.getElementById("search-page");
-  let myLandingPage = document.getElementById("landing-page");
+  let mySearchPage = document.getElementById("search");
+  let myLandingPage = document.getElementById("landing");
   let myBtnGoSearch = document.getElementById("go-SP");
   let myBtnGoLanding = document.getElementById("go-LP");
 
@@ -33,6 +34,8 @@ function begin(){
   myBtnSearch = document.getElementById("btn-search");
 
   myInputYear = document.getElementById("input-year");
+
+  mySelectType = document.getElementById("select-type");
 
   mySectMovies = document.getElementById("sectMovies");
 
@@ -89,12 +92,16 @@ function search(){
 }
 
 function fetchProcess(){
-  year=myInputYear.value;
-  searchName = myInput.value;
   fetching = true;
-  pageCounter = searchType == 0? 1: pageCounter + 1;
   loadGif.style.visibility = "visible";
-  fetch("https://www.omdbapi.com/?s="+searchName+"&y="+year+"&apikey=dfe7b98e&page="+pageCounter).then(
+  
+  searchName = myInput.value;
+  pageCounter = searchType == 0? 1: pageCounter + 1;
+  year = myInputYear.value;
+  type = mySelectType.value;
+  
+  fetch("https://www.omdbapi.com/?apikey=dfe7b98e&s="+searchName+"&page="+pageCounter+
+    "&y="+year+"&type="+type).then(
   response => response.json()).then(data =>{
     showMovies(data.Search);
     fetching = false;

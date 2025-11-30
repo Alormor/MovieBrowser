@@ -9,31 +9,63 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <div id="landing-page">
-        <h1>Welcome to my landing page!</h1>
-        <button id="go-SP">Search movies</button>
-    </div>
+    <section id="landing">
+        <div class="landing-content">
+            <h1>Welcome to SearchMovies.com</h1>
+            <p>
+                SEARCHMOVIES.COM is a simple and interactive web application designed to explore movies 
+                and TV series using the OMDb REST API. Through this project, you can browse a large 
+                collection of titles and access key information such as posters, directors, cast, 
+                plot summaries, release years, and ratings — all loaded dynamically without reloading the page.
+            </p>
 
-    <div id="search-page">
-        <button id="go-LP">Go back to landing page</button>
-        <h1>MOVIES.COM</h1>
-        <div id="search-container">
-            <input id="input-search" placeholder="Search...">
+            <p>
+                From the main search section, you can view results, open detailed descriptions, 
+                and return to your previous list at any time. You can also generate custom reports 
+                with the top-rated, most-voted, or highest-grossing titles, supported by visual charts.
+            </p>
 
-            <button id="btn-search">
-                <i class="fa fa-search"></i>
-            </button>
+            <p>
+                This project demonstrates the use of DOM manipulation, AJAX requests, and RESTful API 
+                integration, providing a smooth and responsive user experience.
+            </p>
 
-            <input id="input-year" placeholder="Year">
+            <p><strong>Click the button to begin exploring.</strong></p>
+
+            <button id="go-SP">Start Exploring</button>
         </div>
-        
-        <section id="sectMovies">
-            <div id="divMovies"></div>
-            <p id="error"></p>
-        </section>
-        <div id="load">
-            <img src="load.gif" alt="GIF centrado">
+    </section>
+
+    <section id="search">
+        <div class="search-content">
+            <button id="go-LP">Go back to landing page</button>
+            <h1>SEARCHMOVIES.COM</h1>
+            <div id="search-container">
+                <input id="input-search" placeholder="Search...">
+
+                <button id="btn-search">
+                    <i class="fa fa-search"></i>
+                </button>
+
+                <div id="filters">
+                    <input id="input-year" placeholder="Year">
+                    <select id="select-type" name="type">
+                        <option value="">No filter</option>
+                        <option value="movie">Movies</option>
+                        <option value="series">Series</option>
+                        <option value="game">Games</option>
+                    </select>     
+                </div>
+            </div>
+            
+            <section id="sectMovies">
+                <div id="divMovies"></div>
+                <p id="error"></p>
+            </section>
+            <div id="load">
+                <img src="load.gif" alt="GIF centrado">
+            </div>
         </div>
-    </div>
+    </section>
 </body>
 </html>
