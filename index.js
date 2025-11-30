@@ -132,6 +132,11 @@ function showMovies(movies){
 
       let myImg = document.createElement("img");
       myImg.src = movies[i].Poster;
+
+      myImg.onerror = () => {
+        myImg.src = "assets/src/images/no-image.png";
+      };
+
       myFigure.appendChild(myImg);
 
       let myFigCapt = document.createElement("figcaption");
