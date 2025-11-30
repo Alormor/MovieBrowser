@@ -110,6 +110,17 @@ button{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+#load{
+    visibility: hidden;
+    text-align: center;
+    height: 50px;
+}
+
+#load img{
+    height: 100%;
+    width: 50px;
+}
+
 @media screen and (max-width: 1300px){
     #divMovies > div {
         width: calc(25% - 10px);

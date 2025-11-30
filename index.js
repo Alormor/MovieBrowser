@@ -15,6 +15,7 @@ let year = "";
 let fetching = false;
 let firstSearchDone = false;
 let searchType = false;
+let loadGif;
 
 let myDivSearch, myInput, myBtnSearch, myIcon, myBtnFilter;
 let error;
@@ -38,6 +39,8 @@ function begin(){
   myDivMovies = document.getElementById("divMovies");
 
   error = document.getElementById("error");
+
+  loadGif = document.getElementById("load");
 
   myBtnGoSearch.addEventListener("click", (e) => {
     mySearchPage.style.visibility = "visible";
@@ -90,11 +93,13 @@ function fetchProcess(){
   searchName = myInput.value;
   fetching = true;
   pageCounter = searchType == 0? 1: pageCounter + 1;
+  loadGif.style.visibility = "visible";
   fetch("https://www.omdbapi.com/?s="+searchName+"&y="+year+"&apikey=dfe7b98e&page="+pageCounter).then(
   response => response.json()).then(data =>{
     showMovies(data.Search);
     fetching = false;
     myInput.value = searchName;
+    loadGif.style.visibility = "hidden";
   })
 }
 
