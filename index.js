@@ -72,11 +72,18 @@ function begin(){
     }
   })
 
+  myInput.addEventListener("input", (e) =>{
+    if(myInput.value.length > 2){
+      search();
+      fetching = false;
+    }
+  })
+
 }
 
 function search(){
   error.innerHTML = "";
-  if(firstSearchDone ){
+  if(firstSearchDone){
     myDivMovies.remove();
 
     myDivMovies = document.createElement("div");
