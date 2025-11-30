@@ -15,9 +15,10 @@ let year = "";
 let fetching = false;
 let firstSearchDone = false;
 let searchType = false;
+let title = "";
 
 let myDivSearch, myInput, myBtnSearch, myIcon, myBtnFilter;
-let error;
+let error, myDivMovieDetail;
 
 function begin(){
   let mySearchPage = document.getElementById("search-page");
@@ -66,6 +67,13 @@ function begin(){
     }
   })
 
+  myDivMovies.addEventListener("click", (e) => {
+    if(e.target.className == "img-movie"){
+      fetchDetails(e.target.id);
+    }
+    
+  })
+
 }
 
 function search(){
@@ -100,10 +108,50 @@ function fetchProcess(){
 
 function showMovies(movies){
   console.log(movies);
-  if(movies){
+  if(movies != undefined){
     let moviesLength = movies.length;
     for(let i=0; i<moviesLength; i++){
       let myDiv = document.createElement("div");
+
+      myDivMovies.appendChild(myDiv);
+
+      let myFigure = document.createElement("figure");
+
+      myDiv.appendChild(myFigure);
+
+      let myImg = document.createElement("img");
+      myImg.src = movies[i].Poster;
+      myImg.className = "img-movie";
+      myImg.id = movies[i].Title;
+      myFigure.appendChild(myImg);
+
+      let myFigCapt = document.createElement("figcaption");
+      myFigCapt.innerHTML = movies[i].Title;
+      myFigure.appendChild(myFigCapt);
+    }
+  }else{
+    error.innerHTML = "There are no results.";
+  }
+}
+
+function fetchDetails(title){
+  fetch("https://www.omdbapi.com/?t=Thor:%20The%20Dark%20World&apikey=dfe7b98e").then(
+  response => response.json()).then(data =>{
+    console.log(data.Search);
+    showDetails(data.Search);
+    fetching = false;
+  })
+}
+
+function showDetails(details){
+  console.log(details);
+  if(details != undefined){
+    let detailsLength = details.length;
+    for(let i=0; i<detailsLength; i++){
+
+
+      let myDiv = document.createElement("div");
+      myDiv.className = "div-movie";
 
       myDivMovies.appendChild(myDiv);
 
@@ -119,7 +167,5 @@ function showMovies(movies){
       myFigCapt.innerHTML = movies[i].Title;
       myFigure.appendChild(myFigCapt);
     }
-  }else{
-    error.innerHTML = year == "" ?"There was an error, try a different search.": "There are no results.";
   }
 }
