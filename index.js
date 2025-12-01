@@ -150,7 +150,6 @@ function showDetails(details){
     let detailsLength = details.length;
     for(let i=0; i<detailsLength; i++){
 
-
       let myDiv = document.createElement("div");
       myDiv.className = "div-movie";
 
