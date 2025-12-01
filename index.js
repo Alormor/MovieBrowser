@@ -135,10 +135,11 @@ function showMovies(movies){
 }
 
 function fetchDetails(title){
-  fetch("https://www.omdbapi.com/?t=Thor:%20The%20Dark%20World&apikey=dfe7b98e").then(
+  fetch("https://www.omdbapi.com/?i=tt6718170&apikey=dfe7b98e").then(
   response => response.json()).then(data =>{
-    console.log(data.Search);
-    showDetails(data.Search);
+    console.log(data);
+    console.log("Entró en fetchDetails");
+    showDetails(data);
     fetching = false;
   })
 }
