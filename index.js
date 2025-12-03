@@ -122,7 +122,7 @@ function showMovies(movies){
       let myImg = document.createElement("img");
       myImg.src = movies[i].Poster;
       myImg.className = "img-movie";
-      myImg.id = movies[i].Title;
+      myImg.id = movies[i].imdbID;
       myFigure.appendChild(myImg);
 
       let myFigCapt = document.createElement("figcaption");
@@ -134,8 +134,9 @@ function showMovies(movies){
   }
 }
 
-function fetchDetails(title){
-  fetch("https://www.omdbapi.com/?i=tt6718170&apikey=dfe7b98e").then(
+function fetchDetails(id){
+  console.log(id);
+  fetch("https://www.omdbapi.com/?i="+id+"&apikey=dfe7b98e").then(
   response => response.json()).then(data =>{
     console.log(data);
     console.log("Entró en fetchDetails");
@@ -147,25 +148,43 @@ function fetchDetails(title){
 function showDetails(details){
   console.log(details);
   if(details != undefined){
-    let detailsLength = details.length;
-    for(let i=0; i<detailsLength; i++){
+    let myDetailPoster = document.getElementById("detail-movie-poster");
+    myDetailPoster.src = details.Poster;
 
-      let myDiv = document.createElement("div");
-      myDiv.className = "div-movie";
+    let myDetailTitle = document.getElementById("detail-movie-title");
+    myDetailTitle.innerHTML = "Title: " + details.Title;
 
-      myDivMovies.appendChild(myDiv);
+    let myDetailRated = document.getElementById("detail-movie-rated");
+    myDetailRated.innerHTML = "Rated: " + details.Rated;
 
-      let myFigure = document.createElement("figure");
+    let myDetailReleased = document.getElementById("detail-movie-released");
+    myDetailReleased.innerHTML = "Released: " + details.Released;
 
-      myDiv.appendChild(myFigure);
+    let myDetailRuntime = document.getElementById("detail-movie-runtime");
+    myDetailRuntime.innerHTML = "Runtime: " + details.Runtime;
 
-      let myImg = document.createElement("img");
-      myImg.src = movies[i].Poster;
-      myFigure.appendChild(myImg);
+    let myDetailGenre = document.getElementById("detail-movie-genre");
+    myDetailGenre.innerHTML = "Genre: " + details.Genre;
 
-      let myFigCapt = document.createElement("figcaption");
-      myFigCapt.innerHTML = movies[i].Title;
-      myFigure.appendChild(myFigCapt);
-    }
+    let myDetailDirector = document.getElementById("detail-movie-director");
+    myDetailDirector.innerHTML = "Director: " + details.Director;
+
+    let myDetailWriter = document.getElementById("detail-movie-writer");
+    myDetailWriter.innerHTML = "Writer: " + details.Writer;
+
+    let myDetailActors = document.getElementById("detail-movie-actors");
+    myDetailActors.innerHTML = "Actors: " + details.Actors;
+
+    let myDetailPlot = document.getElementById("detail-movie-plot");
+    myDetailPlot.innerHTML = "Plot: " + details.Plot;
+
+    let myDetailLanguage = document.getElementById("detail-movie-language");
+    myDetailLanguage.innerHTML = "Language: " + details.Language;
+
+    let myDetailCountry = document.getElementById("detail-movie-country");
+    myDetailCountry.innerHTML = "Country: " + details.Country;
+
+    let myDetailAwards = document.getElementById("detail-movie-awards");
+    myDetailAwards.innerHTML = "Awards: " + details.Awards;
   }
 }
