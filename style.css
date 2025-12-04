@@ -59,9 +59,10 @@ h1{
     width: calc(20% - 10px);
 }
 
-img {
+img.img-movie {
     width: 200px;
     height: 320px;
+    cursor: pointer;
 }
 
 #search-container{
@@ -134,6 +135,22 @@ button{
     text-align: center;
     font-size: 25px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+ul{
+    list-style: none;
+}
+
+#sectDetailMovie {
+    position: fixed;        /* se coloca respecto a la ventana */
+    top: 50%;              
+    left: 50%;
+    transform: translate(-50%, -50%);  /* corrección para centrar */
+    background: #111;       /* opcional: fondo */
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 9999;          /* para que quede por encima */
+    display: none;          /* lo ocultas hasta que se abra */
 }
 
 #load{

@@ -19,7 +19,7 @@ let searchType = false;
 let loadGif;
 
 let myDivSearch, myInput, myBtnSearch, myIcon, myInputYear, mySelectType;
-let error;
+let error, mySectMovieDetail;
 
 function begin(){
   let mySearchPage = document.getElementById("search");
@@ -44,6 +44,8 @@ function begin(){
   error = document.getElementById("error");
 
   loadGif = document.getElementById("load");
+
+  mySectMovieDetail = document.getElementById("sectDetailMovie");
 
   myBtnGoSearch.addEventListener("click", (e) => {
     mySearchPage.style.visibility = "visible";
@@ -76,6 +78,12 @@ function begin(){
     if(myInput.value.length > 2){
       search();
       fetching = false;
+    }
+  })
+
+  myDivMovies.addEventListener("click", (e) => {
+    if(e.target.className == "img-movie"){
+      fetchDetails(e.target.id);
     }
   })
 
@@ -119,7 +127,7 @@ function fetchProcess(){
 
 function showMovies(movies){
   console.log(movies);
-  if(movies){
+  if(movies != undefined){
     let moviesLength = movies.length;
     for(let i=0; i<moviesLength; i++){
       let myDiv = document.createElement("div");
@@ -136,6 +144,8 @@ function showMovies(movies){
       myImg.onerror = () => {
         myImg.src = "assets/src/images/no-image.png";
       };
+      myImg.className = "img-movie";
+      myImg.id = movies[i].imdbID;
 
       myFigure.appendChild(myImg);
 
@@ -144,6 +154,62 @@ function showMovies(movies){
       myFigure.appendChild(myFigCapt);
     }
   }else{
-    error.innerHTML = year == "" ?"There was an error, try a different search.": "There are no results.";
+    error.innerHTML = "There are no results.";
+  }
+}
+
+function fetchDetails(id){
+  console.log(id);
+  mySectMovieDetail.style.display = "flexgit ";
+  fetch("https://www.omdbapi.com/?i="+id+"&apikey=dfe7b98e").then(
+  response => response.json()).then(data =>{
+    console.log(data);
+    console.log("Entró en fetchDetails");
+    showDetails(data);
+    fetching = false;
+  })
+}
+
+function showDetails(details){
+  console.log(details);
+  if(details != undefined){
+    let myDetailPoster = document.getElementById("detail-movie-poster");
+    myDetailPoster.src = details.Poster;
+
+    let myDetailTitle = document.getElementById("detail-movie-title");
+    myDetailTitle.innerHTML = "Title: " + details.Title;
+
+    let myDetailRated = document.getElementById("detail-movie-rated");
+    myDetailRated.innerHTML = "Rated: " + details.Rated;
+
+    let myDetailReleased = document.getElementById("detail-movie-released");
+    myDetailReleased.innerHTML = "Released: " + details.Released;
+
+    let myDetailRuntime = document.getElementById("detail-movie-runtime");
+    myDetailRuntime.innerHTML = "Runtime: " + details.Runtime;
+
+    let myDetailGenre = document.getElementById("detail-movie-genre");
+    myDetailGenre.innerHTML = "Genre: " + details.Genre;
+
+    let myDetailDirector = document.getElementById("detail-movie-director");
+    myDetailDirector.innerHTML = "Director: " + details.Director;
+
+    let myDetailWriter = document.getElementById("detail-movie-writer");
+    myDetailWriter.innerHTML = "Writer: " + details.Writer;
+
+    let myDetailActors = document.getElementById("detail-movie-actors");
+    myDetailActors.innerHTML = "Actors: " + details.Actors;
+
+    let myDetailPlot = document.getElementById("detail-movie-plot");
+    myDetailPlot.innerHTML = "Plot: " + details.Plot;
+
+    let myDetailLanguage = document.getElementById("detail-movie-language");
+    myDetailLanguage.innerHTML = "Language: " + details.Language;
+
+    let myDetailCountry = document.getElementById("detail-movie-country");
+    myDetailCountry.innerHTML = "Country: " + details.Country;
+
+    let myDetailAwards = document.getElementById("detail-movie-awards");
+    myDetailAwards.innerHTML = "Awards: " + details.Awards;
   }
 }
