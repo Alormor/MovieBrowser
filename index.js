@@ -160,7 +160,7 @@ function showMovies(movies){
 
 function fetchDetails(id){
   console.log(id);
-  mySectMovieDetail.style.display = "flexgit ";
+  mySectMovieDetail.style.display = "flex";
   fetch("https://www.omdbapi.com/?i="+id+"&apikey=dfe7b98e").then(
   response => response.json()).then(data =>{
     console.log(data);
