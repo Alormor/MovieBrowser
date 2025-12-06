@@ -36,9 +36,9 @@ body {
 }
 
 #go-LP {
-    position: absolute;
+    position: fixed;
+    top: 10px;
     right: 15px;
-    margin-top: -65px;
 }
 
 h1{
@@ -63,6 +63,8 @@ img.img-movie {
     width: 200px;
     height: 320px;
     cursor: pointer;
+    border: double rgba(199, 132, 212, 0.6) 2.5px;
+    border-radius: 10px;
 }
 
 #search-container{
@@ -73,19 +75,30 @@ img.img-movie {
     gap: 20px;
 }
 
+.blur-background {
+    position: relative;
+    filter: brightness(50%);
+    pointer-events: none;
+    transition: filter 0.3s ease;
+}
+
 #search-container > input{
     width: 400px;
     height: 35px;
+    border-radius: 20px;
+    padding-left: 15px
 }
 
 #filters >  input{
     width: 40px;
     height: 35px;
+    border-radius: 15px;
+    padding-left: 10px
 }
 
 #filters >  select{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    width: 90px;
+    width: 100px;
     height: 40px;
     background-image: url('https://media.posterlounge.com/img/products/650000/643985/643985_poster.jpg');
     background-position: center center;
@@ -142,15 +155,73 @@ ul{
 }
 
 #sectDetailMovie {
-    position: fixed;        /* se coloca respecto a la ventana */
-    top: 50%;              
+    background-image: url('https://media.posterlounge.com/img/products/650000/643985/643985_poster.jpg');
+    background-position: center center;
+    background-attachment: fixed; 
+    
+    position: fixed;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);  /* corrección para centrar */
-    background: #111;       /* opcional: fondo */
-    padding: 20px;
+    transform: translate(-50%, -50%);
+
+    width: 75%;
+    height: 80vh;
+    overflow-y: auto;
+
+    background-color: rgba(0,0,0,0.9);
+    padding: 40px 50px;
     border-radius: 10px;
-    z-index: 9999;          /* para que quede por encima */
-    display: none;          /* lo ocultas hasta que se abra */
+
+    display: flex;
+    visibility: hidden;
+    justify-content: space-between; 
+    align-items: flex-start;
+    gap: 40px; 
+}
+
+#poster-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 100%;
+}
+
+#poster-container img{
+    border: double purple 7px;
+    border-radius: 10px;
+}
+
+#sectDetailMovie > ul{
+    background-color: rgba(199, 132, 212, 0.6);
+    border-radius: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+#sectDetailMovie > ul > li{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(0, 0, 120);
+    text-align: left;
+    margin: 10px;
+}
+
+#detail-movie-ratings-list{
+    margin-top: 5px;
+}
+
+li.empty {
+  height: 10px;
+}
+
+#backToSearch {
+    position: sticky;
+    top: 10px;
+    font-size: 2rem;
+    color: aqua;
+    cursor: pointer;
 }
 
 #load{
@@ -164,20 +235,54 @@ ul{
     width: 50px;
 }
 
-@media screen and (max-width: 1300px){
+@media screen and (max-width: 1400px){
     #divMovies > div {
         width: calc(25% - 10px);
     }
 }
 
-@media screen and (max-width: 1000px){
+@media screen and (max-width: 1100px){
     #divMovies > div {
         width: calc(33% - 10px);
     }
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 800px){
     #divMovies > div {
         width: calc(50% - 10px);
+    }
+}
+
+@media screen and (max-width: 700px){
+    #search-container > input{
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 650px){
+    #search-container > input{
+        width: 350px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    #search-container > input{
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 550px){
+    #search-container > input{
+        width: 250px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    #divMovies > div {
+        width: calc(100%);
+    }
+
+    #search-container > input{
+        width: 200px;
     }
 }

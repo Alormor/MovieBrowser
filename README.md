@@ -35,6 +35,20 @@ Before starting the development, part of the work involves studying the API docu
 - Instead of using a “Load more” button, the application implements **infinite scroll**.  
 - When the user scrolls near the bottom, the next 10 results are automatically fetched and added to the list.
 
+### ✔️ Search Filters
+- Users can search for both **movies and series**.  
+- Automatic search triggers after **typing at least 3 characters**.
+
+### ✔️ Movie Detail View
+- Clicking on a movie or series displays full details:  
+  - Poster  
+  - Director  
+  - Actors  
+  - Plot / Synopsis  
+  - Year  
+  - All available ratings from the API  
+- Users can return to the previous list **in the same state** without losing scroll position.
+
 ---
 
 ## 🛠️ Technologies Used
@@ -43,20 +57,4 @@ Before starting the development, part of the work involves studying the API docu
 - **CSS3**  
 - **JavaScript (ES6+)**  
 - **AJAX (XMLHttpRequest / fetch API)**  
-- **REST API consumption (OMDb)**
-
----
-
-## 📦 Summary
-
-This project demonstrates how to:
-
-- Build a dynamic interface using only JavaScript and DOM manipulation  
-- Make asynchronous API calls  
-- Paginate and display external data  
-- Implement view switching without page reload  
-- Use infinite scrolling for a smoother user experience  
-
-It is a complete practical example of combining front-end logic with real external data.
-
----
+- **REST API consumption (OMDb)**  

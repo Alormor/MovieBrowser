@@ -37,7 +37,7 @@
     </section>
 
     <section id="search">
-        <div class="search-content">
+        <div class="search-content" id="search-content">
             <button id="go-LP">Go back to landing page</button>
             <h1>DeepSpace Movies</h1>
             <div id="search-container">
@@ -50,7 +50,7 @@
                 <div id="filters">
                     <input id="input-year" placeholder="Year">
                     <select id="select-type" name="type">
-                        <option value="">No filter</option>
+                        <option value="">-- Type --</option>
                         <option value="movie">Movies</option>
                         <option value="series">Series</option>
                         <option value="game">Games</option>
@@ -64,28 +64,36 @@
             </section>
             <div id="load">
                 <img src="assets/src/images/load.gif" alt="GIF centrado">
+            </div>  
+        </div>
+
+        <section id="sectDetailMovie">
+            <i id="backToSearch" class="fa fa-long-arrow-left" aria-hidden="true"></i>
+
+            <div id="poster-container">
+                <img id ="detail-movie-poster" src="" alt="">
             </div>
 
-            <section id="sectDetailMovie">
-                <div id="poster-container">
-                    <img id ="detail-movie-poster" src="" alt="">
-                </div>
-                <ul id="listDetail-movie">
-                    <li id="detail-movie-title"></li>
-                    <li id="detail-movie-rated"></li>
-                    <li id="detail-movie-released"></li>
-                    <li id="detail-movie-runtime"></li>
-                    <li id="detail-movie-genre"></li>
-                    <li id="detail-movie-director"></li>
-                    <li id="detail-movie-writer"></li>
-                    <li id="detail-movie-actors"></li>
-                    <li id="detail-movie-plot"></li>
-                    <li id="detail-movie-language"></li>
-                    <li id="detail-movie-country"></li>
-                    <li id="detail-movie-awards"></li>
-                </ul>
-            </section>  
-        </div>
+            <ul id="listDetail-movie">
+                <li id="detail-movie-title"></li>
+                <li id="detail-movie-rated"></li>
+                <li id="detail-movie-released"></li>
+                <li id="detail-movie-runtime"></li>
+                <li id="detail-movie-genre"></li>
+                <li id="detail-movie-director"></li>
+                <li id="detail-movie-writer"></li>
+                <li id="detail-movie-actors"></li>
+                <li id="detail-movie-plot"></li>
+                <li id="detail-movie-language"></li>
+                <li id="detail-movie-country"></li>
+                <li id="detail-movie-awards"></li>
+                <li id="detail-movie-ratings"><strong>Ratings:</strong>
+                    <ul id="detail-movie-ratings-list">
+
+                    </ul>
+                </li>
+            </ul>
+        </section>
     </section>
 </body>
 </html>
