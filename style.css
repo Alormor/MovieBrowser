@@ -67,6 +67,15 @@ img.img-movie {
     border-radius: 10px;
 }
 
+img.img-movie:hover {
+    transform: scale(1.1);
+    transition: 0.3s ease;
+}
+
+figcaption{
+    margin-top: 10px;
+}
+
 #search-container{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: flex;

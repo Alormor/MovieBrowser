@@ -248,3 +248,14 @@ function showDetails(details){
     });
   }
 }
+
+/* 
+JSON.parse(localStorage.getItem("paliculasFavs"));
+JSON.stringify([array])
+localStorage.setItem("peliculasFavs", array);
+
+REACT
+useEffect(() =>{
+  
+  }, [page]);
+*/
