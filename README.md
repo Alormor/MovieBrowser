@@ -13,6 +13,9 @@ The application connects to the **OMDb API** (Open Movie Database), an open API 
 
 Before starting the development, part of the work involves studying the API documentation and testing different queries to understand how it behaves.
 
+The project is live at:
+🔗 https://alormor.github.io/MovieBrowser/
+
 ---
 
 ## 🚀 Features
