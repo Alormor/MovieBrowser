@@ -289,9 +289,6 @@ li.empty {
     
 }
 
-#go-back-SP{
-}
-
 #sectFavMovies {
     display: grid;
     grid-template-columns: repeat(5, 1fr); 
