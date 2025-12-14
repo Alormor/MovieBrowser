@@ -345,6 +345,19 @@ li.empty {
     color: aqua;
 }
 
+#sectFavMovies p {
+    grid-column: 2 / 5; 
+
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 64px;
+    color: aqua;
+    text-align: center;
+}
+
 
 @media screen and (max-width: 1400px){
     #divMovies > div {
