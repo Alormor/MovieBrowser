@@ -3,12 +3,17 @@ window.onload = ()=>{
 }
 
 window.onscroll = () => {
+  if(mySearchPage.style.visibility == "visible") {  
   let closeToEnd = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
   searchType = 1;
   if(closeToEnd && firstSearchDone && !fetching) fetchProcess();
 }
 
-let mySectMovies, myDivMovies;
+
+
+}
+
+let mySearchPage, mySectMovies, myDivMovies;
 let pageCounter = 1;
 let searchName = "";
 let year = "";
@@ -27,7 +32,6 @@ let favList = [];
 let mySectFavMovies;
 
 function begin(){
-  let mySearchPage = document.getElementById("search");
   let myLandingPage = document.getElementById("landing");
   let myFavsPage = document.getElementById("favs");
   let myBtnGoSearch = document.getElementById("go-SP");
@@ -37,6 +41,7 @@ function begin(){
 
   favList = JSON.parse(localStorage.getItem("favList")) || [];
   
+  mySearchPage = document.getElementById("search");
 
   myDivSearch = document.getElementById("search-container");
 

@@ -49,6 +49,14 @@ Before starting the development, part of the work involves studying the API docu
   - All available ratings from the API  
 - Users can return to the previous list **in the same state** without losing scroll position.
 
+
+### ✔️ Favorites System
+- Users can **mark movies as favorites** by clicking on a heart icon overlaying each poster.  
+- Favorited movies are **stored in `localStorage`**, so they persist even after refreshing the page.  
+- Users can **add or remove movies from favorites** dynamically from both the search results and the favorites page.  
+- The **Favorites page** displays all saved movies in a grid layout, with the ability to un-favorite them.  
+- Favorites are synchronized with the heart icons, so previously saved movies appear with a **filled heart** in search results.
+
 ---
 
 ## 🛠️ Technologies Used
