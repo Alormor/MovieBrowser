@@ -38,17 +38,20 @@
 
     <section id="search">
         <div class="search-content" id="search-content">
-            <button id="go-LP">Go back to landing page</button>
+            <div class="buttons">
+                <button id="go-Favs">Favourites <i class="fa-solid fa-heart"></i></button>
+                <button id="go-LP">Go back to landing page</button>
+            </div>
             <h1>DeepSpace Movies</h1>
             <div id="search-container">
-                <input id="input-search" placeholder="Search...">
+                <input id="input-search" placeholder="Search..."/>
 
                 <button id="btn-search">
                     <i class="fa fa-search"></i>
                 </button>
 
                 <div id="filters">
-                    <input id="input-year" placeholder="Year">
+                    <input id="input-year" placeholder="Year"/>
                     <select id="select-type" name="type">
                         <option value="">-- Type --</option>
                         <option value="movie">Movies</option>
@@ -94,6 +97,11 @@
                 </li>
             </ul>
         </section>
+    </section>
+
+    <section id="favs">
+        <button id="go-back-SP">Continue exploring</button>
+        <div id="sectFavMovies"></div>
     </section>
 </body>
 </html>

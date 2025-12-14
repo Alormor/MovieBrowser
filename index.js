@@ -8,24 +8,35 @@ window.onscroll = () => {
   if(closeToEnd && firstSearchDone && !fetching) fetchProcess();
 }
 
-let sectionMovies, myDivMovies;
+let mySectMovies, myDivMovies;
 let pageCounter = 1;
 let searchName = "";
 let year = "";
 let type = "";
+
 let fetching = false;
 let firstSearchDone = false;
 let searchType = false;
 let loadGif;
-let e =[];
+
+let e = [];
 let myDivSearch, myInput, myBtnSearch, myIcon, myInputYear, mySelectType;
 let error, mySectMovieDetail;
+
+let favList = [];
+let mySectFavMovies;
 
 function begin(){
   let mySearchPage = document.getElementById("search");
   let myLandingPage = document.getElementById("landing");
+  let myFavsPage = document.getElementById("favs");
   let myBtnGoSearch = document.getElementById("go-SP");
   let myBtnGoLanding = document.getElementById("go-LP");
+  let myBtnGoFavs = document.getElementById("go-Favs");
+  let myBtnGoSearchFromFavs = document.getElementById("go-back-SP");
+
+  favList = JSON.parse(localStorage.getItem("favList")) || [];
+  
 
   myDivSearch = document.getElementById("search-container");
 
@@ -48,6 +59,8 @@ function begin(){
   loadGif = document.getElementById("load");
 
   mySectMovieDetail = document.getElementById("sectDetailMovie");
+
+  mySectFavMovies = document.getElementById("sectFavMovies");
 
   myBtnGoSearch.addEventListener("click", (e) => {
     mySearchPage.style.visibility = "visible";
@@ -97,6 +110,21 @@ function begin(){
     }
   })
 
+
+  myBtnGoFavs.addEventListener("click", (e) => {
+    mySearchPage.style.visibility = "hidden";
+    myFavsPage.style.visibility = "visible";
+    myInput.value = "";
+    myInputYear.value = "";
+    if(myDivMovies) myDivMovies.remove();
+    showFavouriteMovies(); 
+  });
+
+  myBtnGoSearchFromFavs.addEventListener("click", (e) => {
+    mySearchPage.style.visibility = "visible";
+    myFavsPage.style.visibility = "hidden";
+  })
+
 }
 
 function search(){
@@ -143,32 +171,49 @@ function fetchProcess(){
 function showMovies(movies){
   console.log(movies);
   if(movies != undefined){
+    favList = JSON.parse(localStorage.getItem("favList")) || [];
     error.innerHTML = "";
+
     let moviesLength = movies.length;
     for(let i=0; i<moviesLength; i++){
       let myDiv = document.createElement("div");
-
       myDivMovies.appendChild(myDiv);
 
       let myFigure = document.createElement("figure");
-
       myDiv.appendChild(myFigure);
 
       let myImg = document.createElement("img");
       myImg.src = movies[i].Poster;
-
       myImg.onerror = () => {
         myImg.src = "assets/src/images/no-image.png";
         myImg.style.border = "none";
       };
       myImg.className = "img-movie";
       myImg.id = movies[i].imdbID;
-
       myFigure.appendChild(myImg);
+
+      let mySpan = document.createElement("span");
+      mySpan.className = "icon-heart";
+      myFigure.appendChild(mySpan);
+
+      let myIcon = document.createElement("i");
+      let isFav = false;
+      for(let j = 0; j < favList.length && !isFav; j++){
+        if(favList[j].id === movies[i].imdbID){
+          isFav = true;
+        }
+      }
+      myIcon.className = isFav ? "fa-solid fa-heart" : "fa-regular fa-heart";
+      myIcon.id = "i"+movies[i].imdbID;
+      mySpan.appendChild(myIcon);
 
       let myFigCapt = document.createElement("figcaption");
       myFigCapt.innerHTML = movies[i].Title;
       myFigure.appendChild(myFigCapt);
+
+      myIcon.addEventListener("click", () => {
+        toggleFavorite(myIcon, myImg, myFigCapt);
+      });
     }
   }else{
     error.innerHTML = "There are no results.";
@@ -249,13 +294,78 @@ function showDetails(details){
   }
 }
 
-/* 
-JSON.parse(localStorage.getItem("paliculasFavs"));
-JSON.stringify([array])
-localStorage.setItem("peliculasFavs", array);
+function showFavouriteMovies (){
+  favList = [];
+  favList = JSON.parse(localStorage.getItem("favList")) || [];
 
-REACT
-useEffect(() =>{
-  
-  }, [page]);
-*/
+  mySectFavMovies.innerHTML = "";
+
+  if (favList.length === 0) {
+    mySectFavMovies.innerHTML = "<p>No tienes películas favoritas</p>";
+  }else{
+    for (let i = 0; i < favList.length; i++) {
+
+      let myDiv = document.createElement("div");
+      mySectFavMovies.appendChild(myDiv);
+
+      let mySpan = document.createElement("span");
+      mySpan.className = "icon-heart";
+      myDiv.appendChild(mySpan);
+
+      let myIcon = document.createElement("i");
+      myIcon.className = "fa-solid fa-heart";
+      myIcon.id = "i" + favList[i].id;
+      mySpan.appendChild(myIcon);
+
+      let myFigure = document.createElement("figure");
+      myDiv.appendChild(myFigure);
+
+      let myImg = document.createElement("img");
+      myImg.src = favList[i].poster;
+      myImg.className = "img-movie";
+      myImg.id = favList[i].id;
+
+      myImg.onerror = () => {
+        myImg.src = "assets/src/images/no-image.png";
+        myImg.style.border = "none";
+      };
+
+      myFigure.appendChild(myImg);
+
+      let myFigCapt = document.createElement("figcaption");
+      myFigCapt.innerHTML = favList[i].Title;
+      myFigure.appendChild(myFigCapt);
+
+      myIcon.addEventListener("click", () => {
+        toggleFavorite(myIcon, myImg, myFigCapt);
+
+        if(myIcon.classList.contains("fa-regular")) {
+          myDiv.remove();
+          if(favList.length === 0) {
+            mySectFavMovies.innerHTML = "<p>No tienes películas favoritas</p>";
+          }
+        }
+      });
+    }
+  }
+}
+
+
+function toggleFavorite(myIcon, myImg, myFigCapt) {
+  if(myIcon.classList.contains("fa-regular")){
+    myIcon.className = "fa-solid fa-heart";
+
+    let myObj = {
+        poster: myImg.src,
+        Title: myFigCapt.innerHTML,
+        id: myImg.id
+    };
+    
+    favList.push(myObj);
+  } else {
+    myIcon.className = "fa-regular fa-heart";
+    favList = favList.filter(movie => movie.id !== myImg.id);
+  }
+
+  localStorage.setItem("favList", JSON.stringify(favList));
+}
