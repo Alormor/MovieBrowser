@@ -306,7 +306,7 @@ function showFavouriteMovies (){
   mySectFavMovies.innerHTML = "";
 
   if (favList.length === 0) {
-    mySectFavMovies.innerHTML = "<p>No tienes películas favoritas</p>";
+    mySectFavMovies.innerHTML = "<p>There are no favourite movies stored</p>";
   }else{
     for (let i = 0; i < favList.length; i++) {
 
@@ -347,7 +347,7 @@ function showFavouriteMovies (){
         if(myIcon.classList.contains("fa-regular")) {
           myDiv.remove();
           if(favList.length === 0) {
-            mySectFavMovies.innerHTML = "<p>No tienes películas favoritas</p>";
+            mySectFavMovies.innerHTML = "<p>There are no favourite movies stored</p>";
           }
         }
       });
